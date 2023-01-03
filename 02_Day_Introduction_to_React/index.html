@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Days Of React Challenge</title>
+    <style>
+        /* 公共样式 */
+        * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+        line-height: 1.5;
+        font-family: 'Montserrat';
+        font-weight: 300;
+        color: black;
+      }
+
+      .root {
+        min-height: 100%;
+        position: relative;
+      }
+
+      .header-wrapper,
+      .main-wrapper,
+      .footer-wrapper {
+        width: 85%;
+        margin: auto;
+      }
+
+      .header-wrapper,
+      .main-wrapper {
+        padding: 10px;
+        margin: 2px auto;
+      }
+
+      h1 {
+        font-size: 70px;
+        font-weight: 300;
+      }
+
+      h2,
+      h3 {
+        font-weight: 300;
+      }
+
+      header {
+        background-color: #457c8a;
+        padding: 10px;
+      }
+
+      main {
+        padding: 10px;
+        padding-bottom: 60px;
+      }
+
+      ul {
+        margin-left: 15px;
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        background: #457c8a;
+      }
+
+      .footer-wrapper {
+        font-weight: 400;
+        text-align: center;
+        line-height: 60px;
+      }
+      .info-style{
+        width: 100%;
+      }
+      .info-style tr th,.info-style tr td{
+        width: 10%;
+        text-align: left;
+        background-color: rgb(231, 231, 231);
+        padding-left: 10px;
+      }
+    </style>
+</head>
+
+<body>
+    <div class="root"></div>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        console.log('react');
+        const rootElement = document.querySelector('.root')
+        const welcome = 'react Challenge Day 2'
+        const title = 'Getting Started'
+        const subtitle = 'JavaScript Library'
+        const author ={
+            firstName:'槐序',
+            lastName: '廿二'
+        }
+        const infoData ={
+            name:'槐序廿二',
+            age:27,
+            country:'china',
+            title:'web engineer',
+            gender:'女',
+            email:'**********@emial.com',
+            phone:'100-0000-0000',
+        }
+        const info =(
+            <div className='info-style'>
+                <h2>{infoData.name}</h2>    
+                <table>
+                    <thead>
+                        <tr>
+                            <th>age</th>    
+                            <th>country</th>  
+                            <th>title</th>    
+                            <th>gender</th>   
+                            <th>email</th>   
+                            <th>phone</th>   
+                        </tr>    
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{infoData.age}</td>
+                            <td>{infoData.country}</td>
+                            <td>{infoData.title}</td>
+                            <td>{infoData.gender}</td>
+                            <td>{infoData.email}</td>
+                            <td>{infoData.phone}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        )
+        const authorLastName = 'Yetayeh'
+        const date = 'Jan 3, 2023'
+        const header = (
+            <header>
+                <div className='header-wrapper'>
+                    <h1>{welcome}</h1>
+                    <h2>{title}</h2>
+                    <h3>{subtitle}</h3>
+                    <p>Instructor: {author.firstName}·{author.lastName}</p>
+                    <small>Date: {date}</small>
+                </div>
+            </header>
+        )
+        const techs = ['HTML','CSS','JavaScript']
+        const techsFormatted = techs.map((tech)=><li key={tech}>{tech}</li>)
+        const mainStyle = { border: '2px solid skyblue', backgroundColor: '#999' }
+        const main = (
+            <main className='main-wrapper'>
+                <p>
+                    Prerequisite to get started{' '}
+                    <strong>
+                        <em>react.js</em>    
+                    </strong>:
+                </p>
+                <ul>{techsFormatted}</ul>
+                <hr/>
+                {info}
+            </main>
+        )
+        const copyRight = 'CopyRight 2023'
+        const footer = (
+            <footer>
+                <div className='footer-wrapper'><p>{copyRight}</p></div>
+            </footer>
+        )
+        const app = (
+            <div>
+                {header}
+                {main}
+                {footer}
+            </div>
+        )
+        ReactDOM.render(app, rootElement)
+    </script>
+</body>
+
+</html>
