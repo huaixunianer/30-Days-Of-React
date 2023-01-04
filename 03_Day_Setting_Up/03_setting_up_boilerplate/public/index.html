@@ -12,7 +12,7 @@
       content="Web site created using create-react-app"
     />
 
-    <title>30 Days Of React App</title>
+    <title>React day 03</title>
     <style>
       /* == General style === */
       * {
@@ -23,7 +23,7 @@
 
       html,
       body {
-        height: 100%;
+        /* height: 100%; */
         line-height: 1.5;
         font-family: 'Montserrat';
         font-weight: 300;
@@ -31,8 +31,8 @@
       }
 
       .root {
-        min-height: 100%;
-        position: relative;
+        /* height: 100%; */
+        /* position: relative; */
       }
 
       .header-wrapper,
@@ -75,10 +75,96 @@
       ul li {
         list-style: none;
       }
-
+      .info-style{
+        width: 100%;
+      }
+      .info-style tr th,.info-style tr td{
+        width: 10%;
+        text-align: left;
+        background-color: rgb(231, 231, 231);
+        padding-left: 10px;
+      }
+      .img-wrapper{
+        margin: 20px 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
+      .img-wrapper img{
+        text-align: center;
+        width: 200px;
+        height: auto;
+      }
+      .level3-wrapper{
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 20px;
+        background-color: #c2e6f4;
+        text-align: center;
+        padding: 20px 0;
+      }
+      .level3-wrapper h1,
+      .level3-wrapper p,
+      .level3-wrapper .input-wrapper,
+      .level3-wrapper button{
+        margin-top: 20px;
+      }
+      .level3-wrapper h1{
+        font-size: 30px;
+        font-weight: 500;
+      }
+      .level3-wrapper .input-wrapper input{
+        width: 200px;
+        height: 36px;
+        margin: 5px;
+        border-radius: 5px;
+        border: none;
+        padding-left: 10px;
+      }
+      .level3-wrapper button{
+        width: 300px;
+        height: 36px;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        background-color: #f37474;
+      }
+      .author-wrapper{
+        padding: 20px 0;
+      }
+      .author-wrapper .img-wrapper{
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        overflow: hidden;
+      }
+      .author-wrapper .img-wrapper img{
+        height: 100%;
+        width: auto;
+      }
+      .author-wrapper h5{
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      .author-wrapper p{
+        margin-bottom: 20px;
+      }
+      .slill-wrapper{
+        margin-bottom: 20px;
+        display: flex;
+      }
+      .slill-wrapper div{
+        color: #fff;
+        background-color: #2acfcf;
+        padding: 5px 10px;
+        border-radius: 8px;
+        margin: 0 5px;
+      }
       footer {
-        position: absolute;
-        bottom: 0;
+        /* position: absolute;
+        bottom: 0; */
         width: 100%;
         height: 60px;
         /* Height of the footer */
