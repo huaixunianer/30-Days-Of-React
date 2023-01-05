@@ -1,8 +1,31 @@
 // index.js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import asabenehImage from './images/asabeneh.jpg'
+import useImg from './img/img.jpg'
+import cssLogo from './img/css_logo.png'
+import htmlLogo from './img/html_logo.png'
+import jsLogo from './img/js_logo.png'
+import reactLogo from './img/react_logo.png'
 
+const SkillLogo = () =>{
+  const logoList = [cssLogo,htmlLogo,jsLogo,reactLogo]
+  const logoImg = logoList.map((url)=><img key={url} src={url}/>)
+  return logoImg
+}
+const Btncomponent = ()=>{
+  return (
+    <div className='level3-wrapper'>
+      <h1>SUBSCRIBE</h1>
+      <p>Sign up with your email address to recelve news and updates</p>
+      <div className='input-wrapper'>
+      <input placeholder='First name'></input>
+      <input placeholder='Last name'></input>
+      <input placeholder='Email name'></input>
+      </div>
+      <button>Subscribe</button>
+    </div>
+  )
+}
 const hexaColor = () => {
   let str = '0123456789abcdef'
   let color = ''
@@ -10,21 +33,22 @@ const hexaColor = () => {
     let index = Math.floor(Math.random() * str.length)
     color += str[index]
   }
+  console.log(color);
   return '#' + color
 }
 
 const HexaColor = () => {
   const bgColor = hexaColor()
   const styles = {
-    height: '100px',
+    height: '50px',
     display: 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     fontFamily: 'Montserrat',
     margin: '2px auto',
     borderRadius: '5px',
-    width: '75%',
-    border: '2px solid black',
+    width: '100%',
+    backgroundColor: bgColor
   }
   return (
     <div style={styles}>
@@ -47,12 +71,26 @@ const Header = () => (
 )
 
 // User Card Component
-const UserCard = () => (
-  <div className='user-card'>
-    <img src={asabenehImage} alt='asabeneh image' />
-    <h2>Asabeneh Yetayeh</h2>
-  </div>
-)
+const UserCard = () => {
+  const authorData = {
+    img:useImg,
+    name:'槐序廿二',
+    level:'Promary development,China',
+    skills:['HTML','CSS','JS','VUE','REACT'],
+    time:'Jan 04, 2023'
+  }
+  const skill = authorData.skills.map((item)=><div key={item}>{item}</div>)
+  return (
+    <div className='author-wrapper'>
+        <div className='img-wrapper'><img src={authorData.img}/></div>
+        <h5>{authorData.name}</h5>
+        <p>{authorData.level}</p>
+        <h5>SKILLS</h5>
+        <div className='slill-wrapper'>{skill}</div>
+        <p>{authorData.time}</p>
+    </div>
+  )
+}
 
 // TechList Component
 const TechList = () => {
@@ -77,12 +115,17 @@ const Main = () => (
       <ul>
         <TechList />
       </ul>
-      <UserCard />
+      <div className='img-wrapper'><SkillLogo/></div>
+      <Btncomponent/>
       <div>
-        {/* Generate two different hexa colors every time */}
+        <HexaColor />
+        <HexaColor />
+        <HexaColor />
+        <HexaColor />
         <HexaColor />
         <HexaColor />
       </div>
+      <UserCard />
     </div>
   </main>
 )
