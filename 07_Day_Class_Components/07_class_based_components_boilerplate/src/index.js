@@ -1,30 +1,6 @@
-// index.js
-
 import React from 'react'
 import ReactDOM from 'react-dom'
-import asabenehImage from './images/asabeneh.jpg'
-
-// Fuction to show month date year
-
-// User Card Component
-const UserCard = ({ user: { firstName, lastName, image } }) => (
-  <div className='user-card'>
-    <img src={image} alt={firstName} />
-    <h2>
-      {firstName}
-      {lastName}
-    </h2>
-  </div>
-)
-
-// A button component
-const Button = ({ text, onClick, style }) => (
-  <button style={style} onClick={onClick}>
-    {text}
-  </button>
-)
-
-// CSS styles in JavaScript Object
+// style
 const buttonStyles = {
   backgroundColor: '#61dbfb',
   padding: 10,
@@ -35,15 +11,12 @@ const buttonStyles = {
   fontSize: 18,
   color: 'white',
 }
-
-// class based component
-class Header extends React.Component {
-  constructor(props) {
+// Header
+class Header extends React.Component{
+  constructor(props){
     super(props)
-    // the code inside the constructor run before any other code
   }
-  render() {
-    console.log(this.props.data)
+  render(){
     const {
       welcome,
       title,
@@ -51,7 +24,6 @@ class Header extends React.Component {
       author: { firstName, lastName },
       date,
     } = this.props.data
-
     return (
       <header>
         <div className='header-wrapper'>
@@ -67,36 +39,35 @@ class Header extends React.Component {
     )
   }
 }
-
-// TechList Component
-// class base component
-class TechList extends React.Component {
-  constructor(props) {
+// TechList
+class TechList extends React.Component{
+  constructor(props){
     super(props)
   }
-  render() {
-    const { techs } = this.props
-    const techsFormatted = techs.map((tech) => <li key={tech}>{tech}</li>)
-    return techsFormatted
+  render(){
+    const {techs} = this.props
+    const techsFormetted = techs.map((tech)=> <li key={tech}>{tech}</li>)
+    return techsFormetted
   }
 }
-
-// Main Component
-// Class Component
-class Main extends React.Component {
-  constructor(props) {
+// Button
+const Button = ({ text, onClick, style }) => (
+  <button style={style} onClick={onClick}>
+    {text}
+  </button>
+)
+// Main
+class Main extends React.Component{
+  constructor(props){
     super(props)
   }
-  render() {
-    return (
+  render(){
+    return(
       <main>
         <div className='main-wrapper'>
           <p>Prerequisite to get started react.js:</p>
-          <ul>
-            <TechList techs={this.props.techs} />
-          </ul>
-          <UserCard user={this.props.user} />
-          <Button
+          <TechList techs={this.props.techs}/>
+          <Button 
             text='Greet People'
             onClick={this.props.greetPeople}
             style={buttonStyles}
@@ -111,25 +82,25 @@ class Main extends React.Component {
     )
   }
 }
-
-// Footer Component
-// Class component
-class Footer extends React.Component {
-  constructor(props) {
+class Footer extends React.Component{
+  constructor(props){
     super(props)
   }
-  render() {
-    return (
+  render(){
+    return(
       <footer>
         <div className='footer-wrapper'>
-          <p>Copyright {this.props.date.getFullYear()}</p>
+          <p>CopyRight {this.props.date.getFullYear()}</p>
         </div>
       </footer>
     )
   }
 }
-
-class App extends React.Component {
+// App
+class App extends React.Component{
+  greetPeople = ()=>{
+    console.log('Welcome to 30 Days Of React Challenge, 2023');
+  }
   showDate = (time) => {
     const months = [
       'January',
@@ -145,50 +116,39 @@ class App extends React.Component {
       'November',
       'December',
     ]
-
     const month = months[time.getMonth()].slice(0, 3)
     const year = time.getFullYear()
     const date = time.getDate()
     return ` ${month} ${date}, ${year}`
   }
   handleTime = () => {
-    alert(this.showDate(new Date()))
+    console.log(this.showDate(new Date()))
   }
-  greetPeople = () => {
-    alert('Welcome to 30 Days Of React Challenge, 2020')
-  }
-  render() {
+  render(){
     const data = {
       welcome: 'Welcome to 30 Days Of React',
       title: 'Getting Started React',
       subtitle: 'JavaScript Library',
       author: {
-        firstName: 'Asabeneh',
-        lastName: 'Yetayeh',
+        firstName: '槐序',
+        lastName: '廿二',
       },
-      date: 'Oct 7, 2020',
+      date: 'Jan 10, 2023',
     }
-    const techs = ['HTML', 'CSS', 'JavaScript']
-
-    // copying the author from data object to user variable using spread operator
-    const user = { ...data.author, image: asabenehImage }
-
-    return (
-      <div className='app'>
-        <Header data={data} />
-        <Main
-          user={user}
-          techs={techs}
-          handleTime={this.handleTime}
-          greetPeople={this.greetPeople}
-        />
-
-        <Footer date={new Date()} />
-      </div>
-    )
+    const techs = ['HTML','CSS','JavaScript']
+    
+  return(
+    <div className='app'>
+      <Header data={data}/>
+      <Main
+        techs={techs}
+        greetPeople={this.greetPeople}
+        handleTime={this.handleTime}
+      />
+      <Footer date={new Date()}/>
+    </div>
+  )
   }
 }
-
-const rootElement = document.getElementById('root')
-ReactDOM.render(<App />, rootElement)
-
+const rootEle = document.getElementById('root')
+ReactDOM.render(<App/>,rootEle)
