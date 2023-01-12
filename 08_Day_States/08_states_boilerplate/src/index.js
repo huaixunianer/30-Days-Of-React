@@ -3,30 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import asabenehImage from './images/asabeneh.jpg'
 
-// Fuction to show month date year
-
-const showDate = (time) => {
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-
-  const month = months[time.getMonth()].slice(0, 3)
-  const year = time.getFullYear()
-  const date = time.getDate()
-  return ` ${month} ${date}, ${year}`
-}
-
+import {countriesData} from './data/countries.js'
+console.log(countriesData);
 // User Card Component
 const UserCard = ({ user: { firstName, lastName, image } }) => (
   <div className='user-card'>
@@ -64,13 +42,13 @@ class Header extends React.Component {
     // the code inside the constructor run before any other code
   }
   render() {
-    console.log(this.props.data)
+    // console.log(this.props.data)
     const {
       welcome,
       title,
       subtitle,
       author: { firstName, lastName },
-      date,
+      date
     } = this.props.data
 
     return (
@@ -112,6 +90,30 @@ class TechList extends React.Component {
   }
 }
 
+// select country Component
+class Country extends React.Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    const {name,capital,languages,language,population,currency} = this.props.curCountry
+    return (
+      <div className='country-wrapper'>
+      <div className='country-img'>
+        <img/>
+        <b>{name}</b>
+      </div>
+      <div className='country-info'>
+        <p>capital: {capital}</p>
+        <p>language: {languages || language}</p>
+        <p>population: {population}</p>
+        <p>currency: {currency}</p>
+      </div>
+      <button onClick={this.props.changeCountry}>select country</button>
+    </div>
+    )
+  }
+}
 // Main Component
 // Class Component
 class Main extends React.Component {
@@ -128,9 +130,11 @@ class Main extends React.Component {
       count,
       addOne,
       minusOne,
+      curCountry,changeCountry
     } = this.props
     return (
-      <main>
+      <main style={this.props.style}>
+        <hr/>
         <div className='main-wrapper'>
           <p>Prerequisite to get started react.js:</p>
           <ul>
@@ -149,6 +153,8 @@ class Main extends React.Component {
             style={buttonStyles}
           />
           <Count count={count} addOne={addOne} minusOne={minusOne} />
+          <Country curCountry={curCountry} changeCountry={changeCountry}/>
+
         </div>
       </main>
     )
@@ -163,7 +169,8 @@ class Footer extends React.Component {
   }
   render() {
     return (
-      <footer>
+      <footer style={this.props.styles}>
+        <hr/>
         <div className='footer-wrapper'>
           <p>Copyright {this.props.date.getFullYear()}</p>
         </div>
@@ -179,6 +186,9 @@ class App extends React.Component {
       backgroundColor: '',
       color: '',
     },
+    isLiked:false,
+    curNum:0,
+    // curCountryData:countriesData[curNum]
   }
   showDate = (time) => {
     const months = [
@@ -195,7 +205,6 @@ class App extends React.Component {
       'November',
       'December',
     ]
-
     const month = months[time.getMonth()].slice(0, 3)
     const year = time.getFullYear()
     const date = time.getDate()
@@ -204,7 +213,6 @@ class App extends React.Component {
   addOne = () => {
     this.setState({ count: this.state.count + 1 })
   }
-
   // method which subtract one to the state
   minusOne = () => {
     this.setState({ count: this.state.count - 1 })
@@ -215,7 +223,20 @@ class App extends React.Component {
   greetPeople = () => {
     alert('Welcome to 30 Days Of React Challenge, 2020')
   }
-  changeBackground = () => {}
+  changeBackground = () => {
+    this.setState((prevState)=>{
+      return ({styles:prevState.styles={
+        backgroundColor:'#0f172a',
+        color:'#fff'
+      }})
+    })
+  }
+  changeCountry =()=>{
+    this.setState((prev)=>{
+      // return({curCountryData:prev.curCountryData = })
+      return ({curNum:prev.curNum +1})
+    })
+  }
   render() {
     const data = {
       welcome: 'Welcome to 30 Days Of React',
@@ -231,11 +252,11 @@ class App extends React.Component {
     const date = new Date()
     // copying the author from data object to user variable using spread operator
     const user = { ...data.author, image: asabenehImage }
-
+    const curCountryData = countriesData[this.state.curNum]
     return (
       <div className='app'>
         {this.state.backgroundColor}
-        <Header data={data} />
+        <Header data={data} styles={this.state.styles} />
         <Main
           user={user}
           techs={techs}
@@ -245,8 +266,11 @@ class App extends React.Component {
           addOne={this.addOne}
           minusOne={this.minusOne}
           count={this.state.count}
+          style={this.state.styles}
+          curCountry={curCountryData}
+          changeCountry={this.changeCountry}
         />
-        <Footer date={new Date()} />
+        <Footer date={date} styles={this.state.styles} />
       </div>
     )
   }
