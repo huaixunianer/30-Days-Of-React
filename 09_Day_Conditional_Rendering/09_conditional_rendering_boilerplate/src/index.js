@@ -30,19 +30,13 @@ class Header extends React.Component {
 }
 
 const Message = ({ message }) => (
-  <div>
-    <h1>{message}</h1>
-  </div>
+  <div><h1>{message}</h1></div>
 )
 const Login = () => (
-  <div>
-    <h3>Please Login</h3>
-  </div>
+  <div><h3>Please Login</h3></div>
 )
-const Welcome = (props) => (
-  <div>
-    <h1>Welcome to 30 Days Of React</h1>
-  </div>
+const Welcome = () => (
+  <div><h1>Welcome to 30 Days Of React</h1></div>
 )
 
 // A button component
@@ -53,7 +47,6 @@ const Button = ({ text, onClick, style }) => (
 )
 
 // TechList Component
-// class base component
 class TechList extends React.Component {
   render() {
     const { techs } = this.props
@@ -63,7 +56,6 @@ class TechList extends React.Component {
 }
 
 // Main Component
-// Class Component
 class Main extends React.Component {
   render() {
     const {
@@ -73,17 +65,55 @@ class Main extends React.Component {
       loggedIn,
       handleLogin,
       message,
+      date,loginText
     } = this.props
-    console.log(message)
 
     const status = loggedIn ? <Welcome /> : <Login />
+    const month = date.getMonth() + 1
+    let season =''
+    let time = ''
+    switch(month){
+      case 1:
+      case 2:
+      case 3:
+        season ='春天'
+      break;
+      case 4:
+      case 5:
+      case 6:
+        season ='夏天'
+      break;
+      case 7:
+      case 8:
+      case 9:
+        season ='秋天'
+      break;
+      case 10:
+      case 11:
+      case 12:
+        season ='冬天'
+      break;
+      default: season ='ERROR'
+    }
+    const hour = date.getHours()
+    if(hour<6){
+      time = '凌晨'
+    }else if(hour<12 && hour>6){
+      time = '上午'
+    }else if(hour === 12){
+      time = '中午'
+    }else if(hour>12 && hour<18){
+      time = '下午'
+    }else if(hour > 18 && hour<24){
+      time = '晚上'
+    }
     return (
       <main>
         <div className='main-wrapper'>
+          <h3>现在的季节：{season}  {month}月</h3>
+          <h3>现在的是一天中的：{time}  {hour}点</h3>
           <p>Prerequisite to get started react.js:</p>
-          <ul>
-            <TechList techs={this.props.techs} />
-          </ul>
+          <ul><TechList techs={this.props.techs} /></ul>
           {techs.length === 3 && (
             <p>You have all the prerequisite courses to get started React</p>
           )}
@@ -98,6 +128,7 @@ class Main extends React.Component {
               onClick={greetPeople}
               style={buttonStyles}
             />
+            {/* &&判断 */}
             {!loggedIn && (
               <p>
                 Please login to access more information about 30 Days Of React
@@ -107,7 +138,7 @@ class Main extends React.Component {
           </div>
           <div style={{ margin: 30 }}>
             <Button
-              text={loggedIn ? 'Logout' : 'Login'}
+              text={loginText}
               style={buttonStyles}
               onClick={handleLogin}
             />
@@ -134,11 +165,7 @@ const buttonStyles = {
 }
 
 // Footer Component
-// Class component
 class Footer extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <footer>
@@ -153,13 +180,26 @@ class Footer extends React.Component {
 class App extends React.Component {
   state = {
     loggedIn: false,
+    loginText:'Login',
     techs: ['HTML', 'CSS', 'JS'],
     message: 'Click show time or Greet people to change me',
   }
   handleLogin = () => {
-    this.setState({
-      loggedIn: !this.state.loggedIn,
-    })
+    if(this.state.loggedIn){
+      this.setState({
+        loggedIn: !this.state.loggedIn,
+      })
+      this.setState({loginText:'Login'})
+    }else{
+      this.setState({loginText:'landing'})
+      setTimeout(()=>{
+        this.setState({
+          loggedIn: !this.state.loggedIn,
+        })
+        this.setState({loginText:'Logout'})
+      },2000)
+    }
+    
   }
   showDate = (time) => {
     const months = [
@@ -176,8 +216,7 @@ class App extends React.Component {
       'November',
       'December',
     ]
-
-    const month = months[time.getMonth()].slice(0, 3)
+    const month = months[time.getMonth()]
     const year = time.getFullYear()
     const date = time.getDate()
     return `${month} ${date}, ${year}`
@@ -203,20 +242,20 @@ class App extends React.Component {
       date: 'Oct 9, 2020',
     }
     const techs = ['HTML', 'CSS', 'JavaScript']
-
+    
     return (
       <div className='app'>
         <Header data={data} />
-
         <Main
           techs={techs}
           handleTime={this.handleTime}
           greetPeople={this.greetPeople}
           loggedIn={this.state.loggedIn}
+          loginText={this.state.loginText}
           handleLogin={this.handleLogin}
           message={this.state.message}
+          date={new Date()}
         />
-
         <Footer date={new Date()} />
       </div>
     )
