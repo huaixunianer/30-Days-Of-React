@@ -3,8 +3,7 @@ import React from 'react'
 // User Card Component
 const UserCard = ({ user: { firstName, lastName, image } }) => (
   <div className='user-card'>
-    <img src={image} alt='asabeneh image' />
-
+    <img src={image} alt=''/>
     <h2>
       {firstName}
       {lastName}

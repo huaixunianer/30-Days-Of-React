@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { showDate } from '../../utils/display-date-and-time'
 
 const Header = ({

@@ -18,7 +18,7 @@ const Country = ({
         <img src={flag} alt={name} />
       </div>
       <h3 className='country_name'>{name.toUpperCase()}</h3>
-      <div class='country_text'>
+      <div className='country_text'>
         <p>{formatedCapital}</p>
         <p>
           <span>{formatLanguage}: </span>
