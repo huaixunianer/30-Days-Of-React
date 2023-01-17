@@ -45,6 +45,9 @@ class App extends Component {
       message: 'Using 30 Days Of React for commercial purpose is not allowed',
     })
   }
+  handleSubmit = (e) =>{
+    alert(this.state.message)
+  }
   render() {
     return (
       <div>
