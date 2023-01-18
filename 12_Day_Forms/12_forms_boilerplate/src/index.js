@@ -28,7 +28,7 @@ const options = [
 // mapping the options to list(array) of JSX options
 
 const selectOptions = options.map(({ value, label }) => (
-  <option value={value}> {label}</option>
+  <option key={value} value={value}> {label}</option>
 ))
 
 class App extends Component {
@@ -56,13 +56,8 @@ class App extends Component {
     },
   }
   handleChange = (e) => {
-    /*
-    // we can get the name and value like this but we can also destructure it from e.target
-    const name = e.target.name
-    const value = e.target.value
-    */
     const { name, value, type, checked } = e.target
-    // [variablename] this we can make a value stored in a certain variable could be a key for an object, in this case a key for the state
+    console.log( name, value, type, checked )
 
     if (type === 'checkbox') {
       this.setState({
@@ -73,9 +68,10 @@ class App extends Component {
     } else {
       this.setState({ [name]: value })
     }
+    console.log(this.state);
   }
   handleBlur = (e) => {
-    const { name, value } = e.target
+    const { name } = e.target
     this.setState({ touched: { ...this.state.touched, [name]: true } })
   }
   validate = () => {
@@ -138,7 +134,7 @@ class App extends Component {
   render() {
     // accessing the state value by destrutcturing the state
     // the noValidate attribute on the form is to stop the HTML5 built-in validation
-
+    // 
     const { firstName } = this.validate()
     return (
       <div className='App'>
@@ -150,6 +146,7 @@ class App extends Component {
               <input
                 type='text'
                 name='firstName'
+                id='firstName'
                 value={this.state.firstName}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
@@ -163,12 +160,13 @@ class App extends Component {
               <input
                 type='text'
                 name='lastName'
+                id='lastName'
                 value={this.state.lastName}
                 onChange={this.handleChange}
                 placeholder='Last Name'
               />
             </div>
-            <div className='form-group'>
+            <div className='hform-group'>
               <label htmlFor='email'>Email </label>
               <input
                 type='email'
@@ -185,6 +183,7 @@ class App extends Component {
             <input
               type='tel'
               name='tel'
+              id='tel'
               value={this.state.tel}
               onChange={this.handleChange}
               placeholder='Tel'
@@ -196,6 +195,7 @@ class App extends Component {
             <input
               type='date'
               name='dateOfBirth'
+              id='dateOfBirth'
               value={this.state.dateOfBirth}
               onChange={this.handleChange}
               placeholder='Date of Birth'
@@ -313,6 +313,7 @@ class App extends Component {
           <div>
             <input type='file' name='file' onChange={this.handleChange} />
           </div>
+          <div><input/></div>
           <div>
             <button>Submit</button>
           </div>
